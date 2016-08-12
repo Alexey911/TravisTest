@@ -33,7 +33,7 @@ function install {
     mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar \
           $MAVEN_OPTIONS \
           -Pdeploy-sonarsource \
-          -Dsonar.host.url=$SONAR_HOST_URL \
+          -Dsonar.host.url=https://server/sonarqube \
           -Dsonar.login=$SONAR_TOKEN \
           -Dsonar.projectVersion=$INITIAL_VERSION
 
