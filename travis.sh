@@ -29,7 +29,7 @@ function install {
     # For this reason errors are ignored with "|| true"
     git fetch --unshallow || true
 
-    mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar \
+    mvn org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar \
           $MAVEN_OPTIONS \
           -Pdev \
           -Dsonar.host.url=https://server/sonarqube \
@@ -39,14 +39,14 @@ function install {
   elif [[ "$TRAVIS_BRANCH" == "branch-"* ]] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     echo 'release branch: trigger QA, no analysis'
 
-    mvn deploy \
+    mvn install \
         $MAVEN_OPTIONS \
         -Pdev
 
   elif [ "$TRAVIS_PULL_REQUEST" != "false" ] && [ -n "${GITHUB_TOKEN:-}" ]; then
     echo 'Internal pull request: trigger QA and analysis'
 
-    mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar \
+    mvn org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar \
         $MAVEN_OPTIONS \
         -Dsource.skip=true \
         -Pdev \
