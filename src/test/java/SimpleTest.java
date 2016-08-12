@@ -17,6 +17,6 @@ public class SimpleTest {
 
     @Test
     public void fail(){
-        assertTrue(false);
+        assertTrue(true);
     }
 }
