@@ -2,7 +2,6 @@
 
 set -euo pipefail
 
-
 function install {
   export MAVEN_OPTS="-Xmx1G -Xms128m"
   MAVEN_OPTIONS="-Dmaven.test.redirectTestOutputToFile=false -Dsurefire.useFile=false -DdisableXmlReport=true -B -e -V"
@@ -32,7 +31,7 @@ function install {
 
     mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar \
           $MAVEN_OPTIONS \
-          -Pdeploy-sonarsource \
+          -Pdev \
           -Dsonar.host.url=https://server/sonarqube \
           -Dsonar.login=1f0a677eece170f505aedabb68e2071f8050b5be \
           -Dsonar.projectVersion=$INITIAL_VERSION
@@ -42,7 +41,7 @@ function install {
 
     mvn deploy \
         $MAVEN_OPTIONS \
-        -Pdeploy-sonarsource
+        -Pdev
 
   elif [ "$TRAVIS_PULL_REQUEST" != "false" ] && [ -n "${GITHUB_TOKEN:-}" ]; then
     echo 'Internal pull request: trigger QA and analysis'
@@ -50,7 +49,7 @@ function install {
     mvn org.jacoco:jacoco-maven-plugin:prepare-agent deploy sonar:sonar \
         $MAVEN_OPTIONS \
         -Dsource.skip=true \
-        -Pdeploy-sonarsource \
+        -Pdev \
         -Dsonar.analysis.mode=issues \
         -Dsonar.github.pullRequest=$TRAVIS_PULL_REQUEST \
         -Dsonar.github.repository=$TRAVIS_REPO_SLUG \
@@ -65,9 +64,6 @@ function install {
         $MAVEN_OPTIONS \
         -Dsource.skip=true
   fi
-
-
 }
 
-# mvn test
 install
