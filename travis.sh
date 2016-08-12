@@ -7,7 +7,7 @@ function install {
   export MAVEN_OPTS="-Xmx1G -Xms128m"
   MAVEN_OPTIONS="-Dmaven.test.redirectTestOutputToFile=false -Dsurefire.useFile=false -DdisableXmlReport=true -B -e -V"
 
-  INITIAL_VERSION=`maven_expression "project.version"`
+  INITIAL_VERSION='${project.version}'
   if [[ $INITIAL_VERSION =~ "-SNAPSHOT" ]]; then
     set_maven_build_version $TRAVIS_BUILD_NUMBER
   fi
@@ -69,5 +69,5 @@ function install {
 
 }
 
-install
 mvn test
+install
