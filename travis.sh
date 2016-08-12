@@ -69,5 +69,5 @@ function install {
 
 }
 
-mvn test
+# mvn test
 install
