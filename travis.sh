@@ -34,7 +34,7 @@ function install {
           $MAVEN_OPTIONS \
           -Pdeploy-sonarsource \
           -Dsonar.host.url=https://server/sonarqube \
-          -Dsonar.login=$SONAR_TOKEN \
+          -Dsonar.login=1f0a677eece170f505aedabb68e2071f8050b5be \
           -Dsonar.projectVersion=$INITIAL_VERSION
 
   elif [[ "$TRAVIS_BRANCH" == "branch-"* ]] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
@@ -55,8 +55,8 @@ function install {
         -Dsonar.github.pullRequest=$TRAVIS_PULL_REQUEST \
         -Dsonar.github.repository=$TRAVIS_REPO_SLUG \
         -Dsonar.github.oauth=$GITHUB_TOKEN \
-        -Dsonar.host.url=$SONAR_HOST_URL \
-        -Dsonar.login=$SONAR_TOKEN
+        -Dsonar.host.url=https://server/sonarqube \
+        -Dsonar.login=1f0a677eece170f505aedabb68e2071f8050b5be
 
   else
     echo 'Feature branch or external pull request: no QA, no analysis. Skip sources'
