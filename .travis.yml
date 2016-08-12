@@ -3,6 +3,11 @@ jdk: oraclejdk8
 sudo: false
 script:
   - 'mvn test'
-
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+notifications:
+    email:
+      recipients:
+        - alexeyzhytnik@gmail.com
+      on_success: never
+      on_failure: always

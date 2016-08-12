@@ -14,4 +14,9 @@ public class SimpleTest {
         s.setValue("new value");
         assertTrue(s.getValue().equals("new value"));
     }
+
+    @Test
+    public void fail(){
+        assertTrue(false);
+    }
 }
