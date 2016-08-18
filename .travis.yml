@@ -12,6 +12,14 @@ cache:
     - $HOME/.m2/repository
     - $HOME/jvm
 
+
+env:
+  global:
+    - COMMIT=${TRAVIS_COMMIT::7}
+
+after_success:
+  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+
 script:
   - echo ${TRAVIS_COMMIT::7}
   - echo $TRAVIS_COMMIT
