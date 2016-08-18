@@ -13,13 +13,12 @@ cache:
     - $HOME/jvm
 
 script:
-  - echo $SECRET
-  - echo lol
+  - echo ${TRAVIS_COMMIT::7}
+  - echo $TRAVIS_COMMIT
   - mvn clean install
 
 after_success:
-  - echo $SECRET
-  - echo lol
+
 
 notifications:
     email:
