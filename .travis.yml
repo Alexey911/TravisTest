@@ -1,22 +1,25 @@
 language: java
-jdk: oraclejdk8
-sudo: false
-install: true
-script: ./travis.sh
 
-before_script:
- - chmod +x travis.sh
+jdk:
+   - oraclejdk8
+
+sudo: false
+
+install: true
 
 cache:
   directories:
     - $HOME/.m2/repository
     - $HOME/jvm
 
-before_cache:
-  - rm -rf $HOME/.m2/repository/org/sonarsource/sonarqube
+script:
+  - echo $SECRET
+  - echo lol
+  - mvn clean install
 
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
+  - echo $SECRET
+  - echo lol
 
 notifications:
     email:
